@@ -16,10 +16,10 @@ import 'package:tasks/get_task.dart';
 class TasksPage  extends StatefulWidget {
   
   @override
-  TasksPageState createState() => TasksPageState();
+  _TasksPageState createState() => _TasksPageState();
 }
 
-class TasksPageState extends State<TasksPage> { 
+class _TasksPageState extends State<TasksPage> { 
     
    final List<Elements> _elements = [Elements('t1', 'todo','due wednesday' , '5/4/21', '25:54'),  
     Elements('t2', 'todo2', 'due thrsdy','13/4/21','23:43')];
@@ -31,27 +31,29 @@ class TasksPageState extends State<TasksPage> {
       _elements.add(newtask);
     });
   }
-  void Addnewtask(BuildContext ctx){
-    showModalBottomSheet(isScrollControlled: true,enableDrag: true,context: ctx, builder: (bCtx){ 
-      return 
-      Container(
-        child: Container(
-          decoration: new BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(45),
-              topRight: Radius.circular(45),
+  void _Addnewtask(BuildContext ctx){
+    showModalBottomSheet(isScrollControlled: true,enableDrag: true,context: ctx, builder: (_){ 
+      return NewInput(_addTask);
+      // Container(
+      //   child: Container(
+      //     decoration: new BoxDecoration(
+      //       borderRadius: BorderRadius.only(
+      //         topLeft: Radius.circular(45),
+      //         topRight: Radius.circular(45),
               
-            )),
-              child: NewInput(_addTask),
-        )
-      );
+      //       )),
+      //         child: NewInput(_addTask),
+      //   )
+      // );
       
       
     }, 
     
     );
   }
-  
+  void inputcreen(BuildContext ctx){
+  Navigator.of(ctx).push(MaterialPageRoute(builder: (ctx) => NewInput(_addTask)));
+}
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +76,14 @@ class TasksPageState extends State<TasksPage> {
         
             GetTask(),
             
+            
            
             
             
             
             FloatingActionButton(
                child: Icon(Icons.add),
-              onPressed: () =>{Addnewtask(context)},
+              onPressed: () =>inputcreen(context),
             
             ),
             

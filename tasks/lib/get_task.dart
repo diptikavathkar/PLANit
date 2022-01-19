@@ -12,7 +12,14 @@ class GetTask extends StatefulWidget {
 class _GetTaskState extends State<GetTask> {
   final List<Elements> _elements = [Elements('t1', 'todo','due wednesday' , '5/4/21', '25:54'),  
     Elements('t2', 'todo2', 'due thrsdy','13/4/21','23:43')];
+  
+  void _addTask(String title, String date, String time, String details){
+    final newtask = Elements(DateTime.now().toString(), title, details , date, time);
 
+    setState(() {
+      _elements.add(newtask);
+    });
+  }
   // void _addTask(String title, String date, String time, String details){
   //   final newtask = Elements(DateTime.now().toString(), title, details , date, time);
 
@@ -35,7 +42,7 @@ class _GetTaskState extends State<GetTask> {
   {
     return Column(
       children: <Widget>[
-       
+        NewInput(_addTask),
         ElemList(_elements,deleteTask),
       ],
       
